@@ -1,0 +1,13 @@
+package: sbp.gitlab.schubergphilis.com/saas/kube-compose
+import:
+- package: gopkg.in/yaml.v2
+- package: k8s.io/kubernetes
+  version: db42d52be455757dcdf9f650c02102d5a947e5fd
+  subpackages:
+  - pkg/api
+  - pkg/client/restclient
+  - pkg/client/unversioned
+  - pkg/client/unversioned/portforward
+  - pkg/client/unversioned/remotecommand
+  - pkg/labels
+  - pkg/watch
