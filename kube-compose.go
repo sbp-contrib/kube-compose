@@ -95,8 +95,16 @@ func logs(client *client.Client, stdout chan string, ns string) error {
 }
 
 func logsForPod(client *client.Client, stdout chan string, ns, pod string) {
+	sinceSeconds := int64(10 * 60)
+	tailLines := int64(50)
+	logOptions := api.PodLogOptions{
+		Follow:       true,
+		SinceSeconds: &sinceSeconds,
+		TailLines:    &tailLines,
+		Timestamps:   true,
+	}
 	for {
-		readCloser, err := client.Pods(ns).GetLogs(pod, &api.PodLogOptions{Follow: true}).Stream()
+		readCloser, err := client.Pods(ns).GetLogs(pod, &logOptions).Stream()
 		if err != nil {
 			continue
 		}
